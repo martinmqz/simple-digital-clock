@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Digital Clock JS</title>
+
+    <style>
+        @font-face {
+            font-family: Technology;
+            src: url(font/Technology.ttf);
+        }
+    </style>
+    <style>
+        body {
+            padding: 1rem;
+            background-color: #000;
+        }
+
+        .digital-clock {
+            font-family: Technology, sans-serif;
+            font-size: 100px;
+            color: lime;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="digital-clock">
+        <span id="time-label"></span>
+    </section>
+
+    <script>
+        const timeLabel = document.getElementById('time-label')
+        const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' }
+
+        setInterval(() => {
+            handleTimeUpdate(timeLabel)
+        }, 1000) // every second
+
+        function handleTimeUpdate(timeElem) {
+            const date = new Date
+            const time = date.toLocaleTimeString('en-US', options)
+            const period = time.match(/[A-Z]+/)?.[0] // extract period string
+
+            timeElem.textContent = `${period} ${time.replace(` ${period}`, '')}` // re-format time string
+        }
+
+    </script>
+</body>
+
+</html>
